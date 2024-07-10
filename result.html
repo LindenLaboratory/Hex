@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Result</title>
+    <style>
+    @import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
+    body {
+        font-family: 'Nunito', sans-serif;
+        background-image: url("/static/modern.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%; /* Set the body height to 100% */
+        overflow-y: hidden; /* Disable vertical scrolling */
+    }
+    .result-box {
+        padding: 50px;
+        margin: 50px;
+        color: black;
+        background-color: rgba(254, 240, 232, 0.77);
+        border-radius: 30px;
+        height: calc(75vh - 50px); /* Subtracting the margin from the viewport height */
+        width: calc(90vw - 50px); /* Subtracting the margin from the viewport width */
+    }
+    </style>
+</head>
+<body>
+    <div class="result-box">
+        <p><b>{{ result }}</b></p>
+    </div>
+    <div id="script-element" style="visibility: hidden;">
+        <script type="text/javascript" src="https://www.authpro.com/auth/LindenLabs/?action=pp"></script>
+    </div>
+    <script type="text/javascript">
+    var data = {
+        login: login,
+        email: email,
+        result: "{{ result }}"
+    };
+  fetch('/database/', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+  });
+    // Hide the script-generated element by setting visibility to hidden
+    var scriptElement = document.getElementById('script-element');
+    if (scriptElement) {
+        scriptElement.style.visibility = 'hidden';
+    }
+
+    // Reset the body height to 100% to fill the screen
+    document.body.style.height = '100%';
+
+    </script>
+</body>
+</html>
